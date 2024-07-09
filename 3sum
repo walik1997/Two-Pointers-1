@@ -1,0 +1,34 @@
+#Time COmplexity - O(n2)
+#Space Complexity - O(1)
+# Did this code successfully run on Leetcode : Yes
+# Any problem you faced while coding this : No
+
+# Your code here along with comments explaining your approach:Taking the first element and performing 2 sum on the rest.
+#There is an outside duplicacy check and an internal. If the sum ==0 i check if it is available in list, if not i append it or else if amount  > 0 reduce the right pointer
+
+
+class Solution:
+    def threeSum(self, nums: list[int]) -> list[list[int]]:
+        a = []
+        s = sorted(nums)
+        for i in range(len(s)):
+            if i > 0 and s[i] == s[i - 1]:
+                continue
+            l = i + 1
+            r = len(s) - 1
+            while l < r:
+                current_sum = s[i] + s[l] + s[r]
+                if current_sum == 0:
+                    target = [s[i], s[l], s[r]]
+                    a.append(target)
+                    l += 1
+                    r -= 1
+                    while l < r and s[l] == s[l - 1]:
+                        l += 1
+                    while l < r and s[r] == s[r + 1]:
+                        r -= 1
+                elif current_sum > 0:
+                    r -= 1
+                else:
+                    l += 1
+        return a

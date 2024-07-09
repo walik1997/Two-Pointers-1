@@ -1,0 +1,21 @@
+#Time COmplexity - O(n)
+#Space Complexity - O(1)
+# Did this code successfully run on Leetcode : Yes
+# Any problem you faced while coding this : No
+
+# Your code here along with comments explaining your approach:Using two pointers. calculating the widthe by subtracting the left - right pointer
+#for the length finding minimum height and updating the max area to optimize space  
+
+class Solution:
+    def maxArea(self, height: list[int]) -> int:
+        l = 0
+        r = len(height) - 1
+        max_area = 0
+        while l < r:
+            area = (r - l) * min(height[l], height[r])
+            max_area = max(max_area, area)
+            if height[l] < height[r]:
+                l += 1
+            else:
+                r -= 1
+        return max_area
